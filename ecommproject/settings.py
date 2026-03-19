@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ecommapp',
     'rest_framework',
+    'ecommapp.apps.EcommappConfig',
 ]
 
 MIDDLEWARE = [
