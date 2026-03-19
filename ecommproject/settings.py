@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ecommapp',
     'rest_framework',
     'ecommapp.apps.EcommappConfig',
 ]
