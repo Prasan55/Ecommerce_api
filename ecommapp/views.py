@@ -70,7 +70,8 @@ class CartItemList(generics.ListCreateAPIView):
                 return [IsAdminUser()]
             else:
                 raise PermissionDenied("Not authorized!")
-        return super().get_permissions()
+        else:
+            raise PermissionDenied("Not authorized!")
     
 # customers can modify only their own products
 class CartItemModify(generics.RetrieveUpdateDestroyAPIView):
