@@ -6,7 +6,7 @@ class CustomPermission(permissions.BasePermission):
         if request.method=="GET":
             return True
         else:
-            if User.objects.get(username=request.user).is_superuser:
+            if request.user and request.user.is_authenticated and request.user.is_superuser:
                 return True
             else:
                 raise PermissionDenied("Only admin users are allowed!")
