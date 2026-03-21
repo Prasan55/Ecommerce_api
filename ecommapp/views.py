@@ -6,9 +6,23 @@ from .permissions import CustomPermission,VendorPermission,CartItemPermission,Or
 from rest_framework.exceptions import PermissionDenied
 from .serializers import ProductSerializer,OrderSerializer,CartItemSerializer,ReviewSerializer,CustomerSerializer,VendorSerializer
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.views import APIView, Response
 
 # All the classes use JWT Authentication
 
+class APIRoot(APIView):
+    def get(self,request):
+        return Response({'customers':request.build_absolute_uri('/customerlist/'),
+                        'products':request.build_absolute_uri('/productlist/'),
+                        'vendors':request.build_absolute_uri('/vendorlist/'),
+                        'reviews':request.build_absolute_uri('/reviewlist/'),
+                        'cartitems':request.build_absolute_uri('/cartitemlist/'),
+                        'editcustomers':request.build_absolute_uri('/customermodify/<int:pk>'),
+                        'editproducts':request.build_absolute_uri('/productmodify/<int:pk>'),
+                        'editvendors':request.build_absolute_uri('/vendormodify/<int:pk>'),
+                        'editreviews':request.build_absolute_uri('/reviewmodify/<int:pk>'),
+                        'editcartitems':request.build_absolute_uri('/cartitemmodify/<int:pk>'),})
+                        
 # Anyone can view customers but only admin users can add customers
 class CustomerList(generics.ListCreateAPIView):
     queryset=Customer.objects.all()

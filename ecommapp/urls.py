@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from rest_framework_simplejwt.views import TokenObtainPairView,TokenRefreshView,TokenVerifyView
 urlpatterns = [
+    path('',views.APIRoot.as_view(),name="api-root"),
     path('productlist/',views.ProductList.as_view()),
     path('productmodify/<int:pk>',views.ProductModify.as_view()),
     path('cartitemlist/',views.CartItemList.as_view()),
