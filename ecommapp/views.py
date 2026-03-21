@@ -17,11 +17,11 @@ class APIRoot(APIView):
                         'vendors':request.build_absolute_uri('/vendorlist/'),
                         'reviews':request.build_absolute_uri('/reviewlist/'),
                         'cartitems':request.build_absolute_uri('/cartitemlist/'),
-                        'editcustomers':request.build_absolute_uri('/customermodify/<int:pk>'),
-                        'editproducts':request.build_absolute_uri('/productmodify/<int:pk>'),
-                        'editvendors':request.build_absolute_uri('/vendormodify/<int:pk>'),
-                        'editreviews':request.build_absolute_uri('/reviewmodify/<int:pk>'),
-                        'editcartitems':request.build_absolute_uri('/cartitemmodify/<int:pk>'),})
+                        'editcustomers':request.build_absolute_uri('/customermodify/1'),
+                        'editproducts':request.build_absolute_uri('/productmodify/1'),
+                        'editvendors':request.build_absolute_uri('/vendormodify/1'),
+                        'editreviews':request.build_absolute_uri('/reviewmodify/1'),
+                        'editcartitems':request.build_absolute_uri('/cartitemmodify/1'),})
                         
 # Anyone can view customers but only admin users can add customers
 class CustomerList(generics.ListCreateAPIView):
