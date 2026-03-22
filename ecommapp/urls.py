@@ -15,6 +15,7 @@ urlpatterns = [
     path('customermodify/<int:pk>',views.CustomerModify.as_view()),
     path('vendorlist/',views.VendorList.as_view()),
     path('vendormodify/<int:pk>',views.VendorModify.as_view()),
+    path('register/',views.register,name="register"),
     path('token/',TokenObtainPairView.as_view()),
     path('refresh/',TokenRefreshView.as_view()),
     path('verifytoken/',TokenVerifyView.as_view())

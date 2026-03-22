@@ -6,10 +6,10 @@ class CustomPermission(permissions.BasePermission):
         if request.method=="GET":
             return True
         else:
-            if request.user and request.user.is_authenticated and request.user.is_superuser:
+            if request.user.is_authenticated:
                 return True
             else:
-                raise PermissionDenied("Only admin users are allowed!")
+                raise PermissionDenied("Not Authorized!")
 class VendorPermission(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         if not request.method=="GET":

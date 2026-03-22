@@ -7,7 +7,8 @@ from rest_framework.exceptions import PermissionDenied
 from .serializers import ProductSerializer,OrderSerializer,CartItemSerializer,ReviewSerializer,CustomerSerializer,VendorSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.views import APIView, Response
-
+from django.contrib.auth.models import User
+from rest_framework.decorators import api_view
 # All the classes use JWT Authentication
 
 class APIRoot(APIView):
@@ -21,7 +22,24 @@ class APIRoot(APIView):
                         'editproducts':request.build_absolute_uri('/productmodify/1'),
                         'editvendors':request.build_absolute_uri('/vendormodify/1'),
                         'editreviews':request.build_absolute_uri('/reviewmodify/1'),
-                        'editcartitems':request.build_absolute_uri('/cartitemmodify/1'),})
+                        'editcartitems':request.build_absolute_uri('/cartitemmodify/1'),
+                        'register':request.build_absolute_uri('/register/'),
+                        'requesttoken':request.build_absolute_uri('/token/'),
+                        'requestnewtoken':request.build_absolute_uri('/refresh/'),
+                        'verifytoken':request.build_absolute_uri('/verifytoken/'),
+                        })
+    
+# Register page
+@api_view(['POST'])
+def register(request):
+        username=request.data.get("username")
+        password=request.data.get("password")
+        try:
+            User.objects.get(username=username)
+            raise PermissionDenied("User already exists!")
+        except User.DoesNotExist:
+            User.objects.create_user(username=username,password=password)
+            return Response({"User has been created successfully!"})
                         
 # Anyone can view customers but only admin users can add customers
 class CustomerList(generics.ListCreateAPIView):
